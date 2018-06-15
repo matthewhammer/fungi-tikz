@@ -1,0 +1,213 @@
+\documentclass{standalone}
+
+\usepackage{charter}
+\usepackage{euler}
+\usepackage{tikz}
+\usetikzlibrary{chains,shapes,scopes}
+
+\begin{document}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\begin{tikzpicture}[
+  nonterminal/.style={
+    rectangle, 
+    minimum size=6mm, 
+    very thick, 
+    draw=black!80, 
+    top color=white, % a shading that is white at the top...
+    bottom color=black!20, % and something else at the bottom
+    font=\itshape
+  },
+  pointer/.style={    
+    draw=black,
+    text centered,
+    fill=black,
+    circle,
+  },
+  nil/.style={
+    fill=yellow!10,
+    rectangle split,
+    rectangle split parts=1,
+    draw,
+    text centered,
+  },
+  cons/.style={
+    fill=yellow!10,
+    rectangle split,
+    rectangle split parts=2,
+    rectangle split horizontal,
+    draw,
+    text centered,
+  },
+  consV/.style={
+    fill=yellow!10,
+    rectangle split,
+    rectangle split parts=2,
+    draw,
+    text centered,
+  },
+  terminal/.style={
+    rectangle,minimum size=6mm,rounded corners=3mm,
+    very thick,draw=black!30,
+    top color=white,bottom color=black!20,
+    font=\ttfamily
+  },
+  node distance=5mm,
+  every on chain/.style={},
+  every join/.style=
+]
+{ [start chain]
+  [start branch=a1]
+  \node (a1) [consV,on chain=going below right] {$\bullet$\nodepart{second}{$\bullet$}};
+  \begin{pgfonlayer}{background}
+        \path (a1.south |- a1.west)+(-0.65,-0.35) node (a1sw) {};
+        \path (a1.north |- a1.east)+(+0.65,+0.35) node (a1ne) {};         
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+  
+        {
+          [start branch=a1]
+          \node (b11) [cons,on chain=going right] {11\nodepart{second}{$\bullet$}};
+          \node (b12) [cons,on chain=going right] {12\nodepart{second}{$\bullet$}};
+          \node (b13) [cons,on chain=going right] {13\nodepart{second}{$\bullet$}};
+          \node (b14) [nil,on chain=going right] {nil};
+        }
+  \node (a2) [consV,on chain=going below right] {$\bullet$\nodepart{second}{$\bullet$}};
+        {
+          [start branch=a2]
+          \node (b21) [cons,on chain=going right] {21\nodepart{second}{$\bullet$}};
+          \node (b22) [cons,on chain=going right] {22\nodepart{second}{$\bullet$}};
+          \node (b23) [cons,on chain=going right] {23\nodepart{second}{$\bullet$}};
+          \node (b24) [nil,on chain=going right] {nil};
+        }
+
+  \node (a3) [consV,on chain=going below right] {$\bullet$\nodepart{second}{$\bullet$}};
+        {
+          [start branch=a3]
+          \node (b31) [cons,on chain=going right] {31\nodepart{second}{$\bullet$}};
+          \node (b32) [cons,on chain=going right] {32\nodepart{second}{$\bullet$}};
+          \node (b33) [cons,on chain=going right] {33\nodepart{second}{$\bullet$}};
+          \node (b34) [nil,on chain=going right] {nil};                   
+        }
+  \node (a4) [consV,on chain=going below right] {$\bullet$\nodepart{second}{$\bullet$}};
+        {
+          [start branch=a4]
+          \node (b41) [cons,on chain=going right] {41\nodepart{second}{$\bullet$}};
+          \node (b42) [cons,on chain=going right] {42\nodepart{second}{$\bullet$}};
+          \node (b43) [cons,on chain=going right] {43\nodepart{second}{$\bullet$}};
+          \node (b44) [nil,on chain=going right] {nil};
+        }
+  \node (a5) [nil,on chain=going below right] {nil};
+
+}
+\begin{pgfonlayer}{background}
+
+        \path (b11.west)+(0,0) node (b11w) {};
+        \path (b11.west)+(0,0) node (b21w) {};
+        \path (b11.south |- b11.west)+(-0.65,-0.35) node (a2x) {};
+        \path (b11.north |- b11.east)+(+0.65,+0.35) node (a2y) {};         
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+        \path (b21.west)+(0,0) node (b21w) {};
+        \path (b21.south |- b21.west)+(-0.65,-0.35) node (a2x) {};
+        \path (b21.north |- b21.east)+(+0.65,+0.35) node (a2y) {};         
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+        
+        \path (b31.west)+(0,0) node (b31w) {};
+        \path (b31.south |- b31.west)+(-0.65,-0.35) node (a2x) {};
+        \path (b31.north |- b31.east)+(+0.65,+0.35) node (a2y) {};         
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+        \path (b41.west)+(0,0) node (b41w) {};
+        \path (b41.south |- b41.west)+(-0.65,-0.35) node (a2x) {};
+        \path (b41.north |- b41.east)+(+0.65,+0.35) node (a2y) {};         
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+        
+        \path (a1.south |- a1.west)+(-0.35,-0.55) node (a1x) {};
+        \path (a1.north |- a1.east)+(+0.35,+0.55) node (a1y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a1x) rectangle (a1y);
+
+        \path (a2.west)+(0,0)            node (a2w) {};
+        \path (a2.north |- a2.west)+(-0.35,-0.55) node (a2x) {};
+        \path (a2.south |- a2.east)+(+0.35,+0.55) node (a2y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+        
+        \path (a3.west)+(0,0)            node (a3w) {};
+        \path (a3.north |- a3.west)+(-0.35,-0.55) node (a2x) {};
+        \path (a3.south |- a3.east)+(+0.35,+0.55) node (a2y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+        \path (a4.west)+(0,0)            node (a4w) {};
+        \path (a4.north |- a4.west)+(-0.35,-0.55) node (a2x) {};
+        \path (a4.south |- a4.east)+(+0.35,+0.55) node (a2y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+        \path (a5.west)+(0,0)            node (a5w) {};
+        \path (a5.north |- a5.west)+(-0.42,-0.38) node (a2x) {};
+        \path (a5.south |- a5.east)+(+0.42,+0.38) node (a2y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+        \path (b14.west)+(0,0)            node (b14w) {};
+        \path (b14.north |- b14.west)+(-0.42,-0.38) node (a2x) {};
+        \path (b14.south |- b14.east)+(+0.42,+0.38) node (a2y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+        \path (b24.west)+(0,0)            node (b24w) {};
+        \path (b24.north |- b24.west)+(-0.42,-0.38) node (a2x) {};
+        \path (b24.south |- b24.east)+(+0.42,+0.38) node (a2y) {};
+        \path[fill=green!10,rounded corners, draw=black]
+        (a2x) rectangle (a2y);
+
+\end{pgfonlayer}
+
+ \begin{pgfonlayer}{foreground}
+   \path[bend right, draw=black,>=stealth,thick] (a1.second)+(0.1,0.1) edge[->] (a2w) {};
+   \path[draw=black,>=stealth,thick] (a1)+(0,.185)                      edge[->] (b11w) {};
+   \path[draw=black,>=stealth,thick] (b11.second)+(0.1,.09)             edge[->] (b12) {};
+   \path[draw=black,>=stealth,thick] (b12.second)+(0.1,.09)             edge[->] (b13) {};
+   \path[draw=black,>=stealth,thick] (b13.second)+(0.1,.09)             edge[->] (b14w) {};
+
+   \path[bend right, draw=black,>=stealth,thick] (a2.second)+(0.1,0.1) edge[->] (a3w) {};
+   \path[draw=black,>=stealth,thick] (a2)+(0,.185)                      edge[->] (b21w) {};
+   \path[draw=black,>=stealth,thick] (b21.second)+(0.1,.09)             edge[->] (b22) {};
+   \path[draw=black,>=stealth,thick] (b22.second)+(0.1,.09)             edge[->] (b23) {};
+   \path[draw=black,>=stealth,thick] (b23.second)+(0.1,.09)             edge[->] (b24w) {};
+
+   \path[bend right, draw=black,>=stealth,thick] (a3.second)+(0.1,0.1) edge[->] (a4w) {};
+   \path[draw=black,>=stealth,thick] (a3)+(0,.185)                      edge[->] (b31w) {};
+   \path[draw=black,>=stealth,thick] (b31.second)+(0.1,.09)             edge[->] (b32) {};
+   \path[draw=black,>=stealth,thick] (b32.second)+(0.1,.09)             edge[->] (b33) {};
+   \path[draw=black,>=stealth,thick] (b33.second)+(0.1,.09)             edge[->] (b34) {};
+
+   %\path[bend left, draw=black,>=stealth,thick] (a4.second)+(0.1,0.1) edge[->] (a4n) {};
+   \path[draw=black,>=stealth,thick] (a4)+(0,.175)                      edge[->] (b41w) {};
+   \path[draw=black,>=stealth,thick] (b41.second)+(0.1,.09)             edge[->] (b42) {};
+   \path[draw=black,>=stealth,thick] (b42.second)+(0.1,.09)             edge[->] (b43) {};
+   \path[draw=black,>=stealth,thick] (b43.second)+(0.1,.09)             edge[->] (b44) {};
+
+   \path[bend right, draw=black,>=stealth,thick] (a4.second)+(0.1,0.1) edge[->] (a5w) {};
+
+ \end{pgfonlayer}
+ 
+%\begin{pgfonlayer}{background}
+%  \path [draw, ->] (b11.second east) edge[bend  left=10]  node [below] {} (b12);
+%\end{pgfonlayer}
+
+\end{tikzpicture}
+
+
+\end{document}

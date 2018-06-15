@@ -1,0 +1,92 @@
+\documentclass[border=10pt]{standalone} 
+\usepackage{tikz}
+\tikzset{
+  treenode/.style = {shape=rectangle, rounded corners,
+                     draw, align=center,
+                     top color=white, bottom color=blue!20},
+  root/.style     = {treenode, font=\Large, bottom color=red!30},
+  env/.style      = {treenode, font=\ttfamily\normalsize},
+  dummy/.style    = {circle,draw}
+}
+\begin{document}
+
+%% \begin{tikzpicture}
+%%   [
+%%     grow                    = right,
+%%     sibling distance        = 4em,
+%%     level distance          = 5em,
+%%     edge from parent/.style = {draw, -latex},
+%%     every node/.style       = {font=\footnotesize},
+%%     sloped
+%%   ]
+%%   \node [root] {Formula}
+%%     child { node [env] {1234}
+%%       edge from parent node [below] {} }
+%%     child { node [dummy] {}
+%%       child { node [dummy] {}
+%%         child { node [env] {}
+%%           edge from parent node [below] {} }
+%%         child { node [env] {alignat}
+%%           edge from parent node [above] {}
+%%                            node [below] {} }
+%%         child { node [env] {gather}
+%%                 edge from parent node [above] {} }
+%%         edge from parent node [below] {} }
+%%       child { node [env] {multline}
+%%               edge from parent node [above, align=center] {}
+%%               node [below] {}}
+%%               edge from parent node [above] {} };
+%% \end{tikzpicture}
+
+\usetikzlibrary{trees}
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+\tikzstyle{optional}=[dashed,fill=gray!50]
+
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.5,-0.7) and
+  two children at (0.5,-0.7) and (0.5,-1.4)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+  \node {texmf}
+    child { node {doc}}		
+    child { node {fonts}}
+    child { node {source}}
+    child { node [selected] {tex}
+      child { node {generic}}
+      child { node [optional] {latex}}
+      child { node {plain}
+        child { node [selected] {tex}
+          child { node {generic}}
+          child { node [optional] {latex}}
+          child { node {plain}}
+        }
+      }
+    }
+    child[missing] { }
+    child[missing] { }
+    child[missing] { }   
+    child[missing] { }
+    child { node {texdoc}
+      child { node {texdoc}};
+      child { node [optional] {latex}}
+      child { node {plain}
+        child { node [selected] {tex}
+          child { node {generic}}
+          child { node [optional] {latex}}                  
+        }
+      }
+    }
+    child[missing] { }
+    child[missing] { }
+    child[missing] { }   
+    child { node [optional] {latex}}
+    child { node {plain}
+      child { node [selected] {tex}
+        child { node {generic}}
+        child { node [optional] {latex}}
+      }
+    }
+    ;
+\end{tikzpicture}
+
+\end{document}
