@@ -6,13 +6,14 @@
 \usetikzlibrary{chains,shapes,scopes}
 
 \newcommand{\Bullet}{}
+\newcommand{\Num}[1]{\large \textbf{#1}}
 
 \begin{document}
 
-\pgfdeclarelayer{edgebackground}
+\pgfdeclarelayer{dcgbackground}
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{foreground}
-\pgfsetlayers{edgebackground,background,main,foreground}
+\pgfsetlayers{dcgbackground,background,main,foreground}
 
 \begin{tikzpicture}[
     nilcross/.style={strike out, draw=black, minimum size=3.6mm, inner sep=0pt, outer sep=0pt, line width=1.2pt},
@@ -68,7 +69,7 @@
     },
     thunk/.style={
       fill=blue!15,
-      circle split,    
+      circle,    
       draw,
       line width=1pt,
       text centered,
@@ -102,72 +103,102 @@
   ]
   { [start chain]
     [start branch=a1]
-    \node (a1) [consV,on chain=going below] {$n_1$\nodepart{second}{3}};
-          {
-            [start branch=a1]
-            \node (a1t) [thunk,on chain=going right] {};
-            \node (b11) [path,on chain=going right] {};
-            \node (b12) [path,on chain=going right] {};
-            \node (b13) [path,on chain=going right] {};
-            \node (b14) [path,on chain=going right] {};
-            \node (b15) [kv,on chain=going right] {$n_1$\nodepart{second}{3}};
-            \node (o1) [consV,on chain=going right] {$n_1$\nodepart{second}{3}};
-          }
-    \node (a2) [consV,on chain=going below] {$n_2$\nodepart{second}{4}};
-          {
-            [start branch=a2]
-            \node (a2t) [thunk,on chain=going right] {};
-            \node (b21) [path,on chain=going right] {};
-            \node (b22) [path,on chain=going right] {};
-            \node (b23) [path,on chain=going right] {};
-            \node (b24) [path,on chain=going right] {};
-            \node (b25) [kv,on chain=going right] {$n_2$\nodepart{second}{4}};
-            \node (o2) [consV,on chain=going right] {$n_2$\nodepart{second}{4}};
-          }
-
-    \node (a3) [consV,on chain=going below] {$n_3$\nodepart{second}{3}};
-          {
-            [start branch=a3]
-            \node (a3t) [thunk,on chain=going right] {};
-            \node (b31) [path,on chain=going right] {};
-            \node (b32) [path,on chain=going right] {};
-            \node (b33) [path,on chain=going right] {};
-            \node (b34) [path,on chain=going right] {};
-            \node (b35) [kv,on chain=going right] {$n_3$\nodepart{second}{3}};
-            %\node (o3) [consV,on chain=going right] {$n_3$\nodepart{second}{3}};
-          }
-    \node (a4) [consV,on chain=going below] {$n_4$\nodepart{second}{9}};
-          {
-            [start branch=a4]
-            \node (a4t) [thunk,on chain=going right] {};
-            \node (b41) [path,on chain=going right] {};
-            \node (b42) [path,on chain=going right] {};
-            \node (b43) [path,on chain=going right] {};
-            \node (b44) [path,on chain=going right] {};
-            \node (b45) [kv,on chain=going right] {$n_4$\nodepart{second}{9}};
-            \node (o4) [consV,on chain=going right] {$n_4$\nodepart{second}{9}};
-
-          }
+    \node (a1) [consV,on chain=going below] {$n_1$\nodepart{second}{\Num{3}}};
+    {
+      [start branch=a1t]
+      \node (a1t) [thunk,on chain=going right] {};
+    }
+    \node (p1) [on chain=going below] {};
+    {
+      [start branch=a1]
+      \node (pad) [on chain=going right,minimum size=5mm] {};
+      
+      \node (b11) [path,on chain=going right] {};
+      \node (b12) [path,on chain=going right] {};
+      \node (b13) [path,on chain=going right] {};
+      \node (b14) [path,on chain=going right] {};
+      \node (b15) [kv,on chain=going right] {$n_1$\nodepart{second}{\Num{3}}};
+      \node (o1) [consV,on chain=going right] {$n_1$\nodepart{second}{\Num{3}}};
+    }         
+    \node (a2) [consV,on chain=going below] {$n_2$\nodepart{second}{\Num{4}}};
+    {
+      [start branch=a2t]            
+      \node (a2t) [thunk,on chain=going right] {};
+    }
+    \node (p2) [on chain=going below] {};
+    {
+      [start branch=a2]
+      \node (pad) [on chain=going right,,minimum size=5mm] {};
+      \node (b21) [path,on chain=going right] {};
+      \node (b22) [path,on chain=going right] {};
+      \node (b23) [path,on chain=going right] {};
+      \node (b24) [path,on chain=going right] {};
+      \node (b25) [kv,on chain=going right] {$n_2$\nodepart{second}{\Num{4}}};
+      \node (o2) [consV,on chain=going right] {$n_2$\nodepart{second}{\Num{4}}};
+    }
+    \node (a3) [consV,on chain=going below] {$n_3$\nodepart{second}{\Num{3}}};
+    {
+      [start branch=a3t]            
+      \node (a3t) [thunk,on chain=going right] {};
+    }    
+    \node (p3) [on chain=going below] {};
+    {
+      [start branch=a3]
+      \node (pad) [on chain=going right,minimum size=5mm] {};
+      \node (b31) [path,on chain=going right] {};
+      \node (b32) [path,on chain=going right] {};
+      \node (b33) [path,on chain=going right] {};
+      \node (b34) [path,on chain=going right] {};
+      \node (b35) [kv,on chain=going right] {$n_3$\nodepart{second}{\Num{3}}};
+      %\node (o3) [consV,on chain=going right] {$n_3$\nodepart{second}{3}};
+    }
+    \node (a4) [consV,on chain=going below] {$n_4$\nodepart{second}{\Num{9}}};
+    {
+      [start branch=a3t]            
+      \node (a4t) [thunk,on chain=going right] {};
+    }    
+    \node (p4) [on chain=going below] {};
+    {
+      [start branch=a4]
+      \node (pad) [on chain=going right,minimum size=5mm] {};
+      \node (b41) [path,on chain=going right] {};
+      \node (b42) [path,on chain=going right] {};
+      \node (b43) [path,on chain=going right] {};
+      \node (b44) [path,on chain=going right] {};
+      \node (b45) [kv,on chain=going right] {$n_4$\nodepart{second}{\Num{9}}};
+      \node (o4) [consV,on chain=going right] {$n_4$\nodepart{second}{\Num{9}}};      
+   }
    \node (a5) [nil,on chain=going below] {nil};
-         {
-           [start branch=a4]
-           \node (a5t) [thunk,on chain=going right] {};
-           \node (o5) [nil,on chain=going right] {nil};
-         }
+   {
+     [start branch=a4t]
+     \node (a5t) [thunk,on chain=going right] {};
+   }
+   \node (p5) [on chain=going below] {};
+   {
+     [start branch=a5]
+     \node (pad) [on chain=going right,minimum size=5mm] {};
+     \node (o5) [nil,on chain=going right] {nil};
+   }
   }
 
   \begin{pgfonlayer}{background}
     \draw (a1.north)+(-5pt,16pt) node {\Large Input};
     \draw (a1t.north)+(-0pt,45pt) node (comp) {\Large Computation};
-    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (comp) edge[->] (a1t);
+
+    \draw (a1t.north west)+(-9pt,8pt) node {$n_0{\cdot}\textrm{t}$};
+    \draw (a2t.north west)+(-9pt,8pt) node {$n_1{\cdot}\textrm{t}$};
+    \draw (a3t.north west)+(-9pt,8pt) node {$n_2{\cdot}\textrm{t}$};
+    \draw (a4t.north west)+(-9pt,8pt) node {$n_3{\cdot}\textrm{t}$};
+    \draw (a5t.north west)+(-9pt,8pt) node {$n_4{\cdot}\textrm{t}$};
     
     \draw (b13.north)+(-0pt,25pt) node {\large Allocated Trie Path (accumulator)};
     \draw (o1.north)+(-0pt,16pt) node {\Large Output};
 
     \path (a1.east)+(0,0) node (a1e) {};
+    \path (a1.south east)+(0,0) node (a1s) {};
 
     \path (b11.north west)+(0,0.45) node {$n_1{\cdot}\textrm{p}{\cdot}0$};
-    \path (b11.south)+(0,0) node (b11s) {};
+    \path (b11.south west)+(0,0) node (b11sw) {};
     \path (b11.west)+(0,0) node (b11w) {};
     \path (b11.south |- b11.west)+(-0.35,-0.55) node (a2x) {};
     \path (b11.north |- b11.east)+(+0.35,+0.55) node (a2y) {};         
@@ -176,7 +207,7 @@
 
     \path (b12.north west)+(0,0.45) node {$n_1{\cdot}\textrm{p}{\cdot}1$};
     \path (b12.west)+(0,0) node (b12w) {};
-    \path (b12.south)+(0,0) node (b12s) {};
+    \path (b12.south west)+(0,0) node (b12sw) {};
     \path (b12.south |- b12.west)+(-0.35,-0.55) node (a2x) {};
     \path (b12.north |- b12.east)+(+0.35,+0.55) node (a2y) {};         
     \path[fill=green!10,rounded corners, line width=1pt, draw=black]
@@ -184,7 +215,7 @@
 
     \path (b13.north west)+(0,0.45) node {$n_1{\cdot}\textrm{p}{\cdot}2$};
     \path (b13.west)+(0,0) node (b13w) {};
-    \path (b13.south)+(0,0) node (b13s) {};
+    \path (b13.south west)+(0,0) node (b13sw) {};
     \path (b13.south |- b13.west)+(-0.35,-0.55) node (a2x) {};
     \path (b13.north |- b13.east)+(+0.35,+0.55) node (a2y) {};         
     \path[fill=green!10,rounded corners, line width=1pt, draw=black]
@@ -214,19 +245,21 @@
     \path[fill=green!10,rounded corners, line width=1pt, draw=black]
     (x) rectangle (y);
 
-    \path[fill=green!10] (b22.north west)+(0,0.45) node (b22n) {$n_2{\cdot}\textrm{p}{\cdot}1$};
+    \path[fill=green!10] (b22.north west)+(0,0.45) node (b22n) {$n_2{\cdot}\textrm{p}{\cdot}0$};
     \path (b22.west)+(0,0) node (b22w) {};
     \path (b22.south |- b22.west)+(-0.35,-0.55) node (x) {};
     \path (b22.north |- b22.east)+(+0.35,+0.55) node (y) {};         
     \path[fill=green!10,rounded corners, line width=1pt, draw=black]
     (x) rectangle (y);
 
+    \path[fill=green!10] (b31.north west)+(0,0.45) node (b22n) {$n_3{\cdot}\textrm{p}{\cdot}0$};
     \path (b31.west)+(0,0) node (b31w) {};
     \path (b31.south |- b31.west)+(-0.35,-0.55) node (a2x) {};
     \path (b31.north |- b31.east)+(+0.35,+0.55) node (a2y) {};         
     \path[fill=green!10,rounded corners, line width=1pt, draw=black]
     (a2x) rectangle (a2y);
 
+    \path[fill=green!10] (b41.north west)+(0,0.45) node (b22n) {$n_4{\cdot}\textrm{p}{\cdot}0$};
     \path (b41.west)+(0,0) node (b41w) {};
     \path (b41.south |- b41.west)+(-0.35,-0.55) node (a2x) {};
     \path (b41.north |- b41.east)+(+0.35,+0.55) node (a2y) {};         
@@ -329,9 +362,7 @@
     \path[fill=black, draw=black,>=stealth,thick] (o1.third)+(0.091,0.1) circle (1.3pt) edge[->] (o2n) {};
     
     % Thunk effects: a1t
-    \path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a1t)+(0,0.1) edge[->] (a1e) node [above=3pt] {};    
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a1t.lower)+(0,0) edge[->] (b11w) node [below=2pt] {};
-    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a1t)+(0,-9pt) edge[->] (a2t);
     
     % Path chain
     \draw (b11)+(0.021,.18) node[nilcross] {};
@@ -350,10 +381,7 @@
     \path[fill=black, draw=black,>=stealth,thick] (o2.third)+(0.091,0.1) circle (1.3pt) edge[->] (o4n) {};
 
     % Thunk effects: a2t
-    \path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a2t)+(0,0.1) edge[->] (a2e) node [above=2pt] {};
-
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a2t.lower)+(0,0) edge[->] (b21w) node [below=2pt] {};
-    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a2t)+(0,-9pt) edge[->] (a3t);
     
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b21.second)+(0.091,.071) circle (1.3pt) edge[->] (b22w) {};
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b22)+(0.021,.18) circle (1.3pt) edge[->] (b23) {};
@@ -363,9 +391,9 @@
     %\path[fill=black, draw=black,>=stealth,thick] (o3.third)+(0.091,0.1) circle (1.3pt) edge[->] (o4n) {};
 
     % Thunk effects: a3t
-    \path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a3t)+(0,0.1) edge[->] (a3e) node [above=2pt] {};
+    %\path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a3t)+(0,0.1) edge[->] (a3e) node [above=2pt] {};
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a3t.lower)+(0,0) edge[->] (b31w) node [below=2pt] {};
-    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a3t)+(0,-9pt) edge[->] (a4t);
+    %\path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a3t)+(0,-9pt) edge[->] (a4t);
 
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b31.second)+(0.091,.071)  circle (1.3pt) edge[->] (b32) {};
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b32)+(0.021,.18)  circle (1.3pt) edge[->] (b33) {};
@@ -374,32 +402,51 @@
     \path[fill=black,draw=black,>=stealth,thick] (a4.third)+(0.1,0.1) circle (1.3pt) edge[->] (a5n) {};
 
     % Thunk effects: a4t
-    \path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a4t)+(0,0.1) edge[->] (a4e) node [above=2pt] {};
+    %
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a4t.lower)+(0,0) edge[->] (b41w) node [below=2pt] {};
-    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a4t)+(0,-9pt) edge[->] (a5t);
+    %\path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a4t)+(0,-9pt) edge[->] (a5t);
 
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b41)+(0.021,.18)  circle (1.3pt) edge[->] (b42) {};
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b42)+(0.021,.18)  circle (1.3pt) edge[->] (b43) {};
     \path[bend right,draw=black,fill=black,>=stealth,thick] (b43.second)+(0.091,.071)  circle (1.3pt) edge[->] (b44) {};
 
     % Thunk effects: a5t
-    \path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a5t)+(0,0.1) edge[->] (a5e) node [above=2pt] {};
+    %
 
 
   \end{pgfonlayer}
 
-  \begin{pgfonlayer}{edgebackground}
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a2t)+(0,0.1) edge[->] (b11s)+(0,-0.1) node [above=3pt] {};
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a2t)+(0,0.1) edge[->] (b12s)+(0,-0.1) node [above=3pt] {};
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a2t)+(0,0.1) edge[->] (b13s)+(0,-0.1) node [above=3pt] {};
+  \begin{pgfonlayer}{dcgbackground}
+    % root/comp
+    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (comp) edge[->] (a1t);
 
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a3t)+(0,0.1) edge[->] (b21)+(0,-0.1) node [above=3pt] {};
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a3t)+(0,0.1) edge[->] (b22)+(0,-0.1) node [above=3pt] {};
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a3t)+(0,0.1) edge[->] (b23)+(0,-0.1) node [above=3pt] {};
-    
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a4t)+(0,0.1) edge[->] (b31)+(0,-0.1) node [above=3pt] {};
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a4t)+(0,0.1) edge[->] (b32)+(0,-0.1) node [above=3pt] {};
-    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a4t)+(0,0.1) edge[->] (b33)+(0,-0.1) node [above=3pt] {};
+    %a1
+    \path[           fill=blue!50!white, draw=blue!50!white,line width=3pt] (a1t) edge[->]   (a1e) node [above=3pt] {};
+    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a1t) edge[->] (a2t);
+
+    %a2    
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a2t) edge[->] (b11sw) node [above=3pt] {};
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a2t) edge[->] (b12sw) node [above=3pt] {};
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a2t) edge[->] (b13sw) node [above=3pt] {};
+    \path[           fill=blue!50!white, draw=blue!50!white,line width=3pt] (a2t) edge[->] (a2e) node [above=2pt] {};
+    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a2t) edge[->] (a3t);
+
+    %a3
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a3t) edge[->] (b21)+(0,-0.1) node [above=3pt] {};
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a3t) edge[->] (b22)+(0,-0.1) node [above=3pt] {};
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a3t) edge[->] (b23)+(0,-0.1) node [above=3pt] {};
+    \path[           fill=blue!50!white, draw=blue!50!white,line width=3pt] (a3t) edge[->] (a3e) node [above=2pt] {};
+    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a3t) edge[->] (a4t);
+
+    %a4    
+    \path[           fill=blue!50!white, draw=blue!50!white,line width=3pt] (a4t) edge[->] (a4e) node [above=2pt] {};    
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a4t) edge[->] (b31)+(0,-0.1) node [above=3pt] {};
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a4t) edge[->] (b32)+(0,-0.1) node [above=3pt] {};
+    \path[bend right,fill=blue!50!white, draw=blue!50!white,line width=2pt] (a4t) edge[->] (b33)+(0,-0.1) node [above=3pt] {};
+    \path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a4t)+(0,-9pt) edge[->] (a5t);
+
+    %a5
+    \path[fill=blue!50!white, draw=blue!50!white,line width=3pt] (a5t) edge[->] (a5e) node [above=2pt] {};
 
   \end{pgfonlayer}
   
