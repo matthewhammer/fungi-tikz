@@ -179,16 +179,32 @@
       \node (b45) [kv,on chain=going right] {$n_4$\nodepart{second}{\Num{9}}};
       \node (o4) [consV,on chain=going right] {$n_4$\nodepart{second}{\Num{9}}};      
    }
-   \node (a5) [nil,on chain=going below] {nil};
+    \node (a5) [consV,on chain=going below] {$n_5$\nodepart{second}{\Num{2}}};
+    {
+      [start branch=a5t]            
+      \node (a5t) [thunk,on chain=going right] {$\texttt{dedup}~a_5$};
+    }    
+    \node (p5) [on chain=going below] {};
+    {
+      [start branch=a4]
+      \node (pad) [pad, on chain=going right,minimum size=15mm] {};
+      \node (b51) [path,on chain=going right] {};
+      \node (b52) [path,on chain=going right] {};
+      \node (b53) [path,on chain=going right] {};
+      \node (b54) [path,on chain=going right] {};
+      \node (b55) [kv,on chain=going right] {$n_5$\nodepart{second}{\Num{2}}};
+      \node (o5) [consV,on chain=going right] {$n_5$\nodepart{second}{\Num{2}}};      
+   }
+   \node (a6) [nil,on chain=going below] {nil};
    {
      [start branch=a4t]
-     \node (a5t) [thunk,on chain=going right] {$\texttt{dedup}~a_5$};
+     \node (a6t) [thunk,on chain=going right] {$\texttt{dedup}~a_6$};
    }
-   \node (p5) [on chain=going below] {};
+   \node (p6) [on chain=going below] {};
    {
      [start branch=a5]
      \node (pad) [pad, on chain=going right,minimum size=15mm] {};
-     \node (o5) [nil,on chain=going right] {nil};
+     \node (o6) [nil,on chain=going right] {nil};
    }
   }
 
@@ -202,6 +218,7 @@
     \draw (a3t.north west)+(-3pt,5pt) node {$n_2{\cdot}\textrm{t}$};
     \draw (a4t.north west)+(-3pt,5pt) node {$n_3{\cdot}\textrm{t}$};
     \draw (a5t.north west)+(-3pt,5pt) node {$n_4{\cdot}\textrm{t}$};
+    \draw (a6t.north west)+(-3pt,5pt) node {$n_6{\cdot}\textrm{t}$};
     
     \draw (b13.north)+(-0pt,25pt) node {\large Allocated Trie Path (accumulator)};
     \draw (o1.north)+(-0pt,16pt) node {\Large Output};
@@ -274,6 +291,7 @@
     \path (b22.west)+(0,0) node (b22w) {};
     \path (b22.south)+(0,0) node (b22s) {};
     \path (b22.south west)+(0,0) node (b22sw) {};
+    \path (b22.south east)+(0,0) node (b22se) {};
     \path (b22.south |- b22.west)+(-0.35,-0.55) node (x) {};
     \path (b22.north |- b22.east)+(+0.35,+0.55) node (y) {};         
     \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
@@ -282,6 +300,7 @@
     \path[fill=green!10] (b23.north west)+(0,0.45) node (b23n) {$n_2{\cdot}\textrm{p}{\cdot}2$};
     \path (b23.west)+(0,0) node (b23w) {};
     \path (b23.south west)+(0,0) node (b23sw) {};
+    \path (b23.south east)+(0,0) node (b23se) {};
     \path (b23.south |- b22.west)+(-0.35,-0.55) node (x) {};
     \path (b23.north |- b22.east)+(+0.35,+0.55) node (y) {};         
     \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
@@ -351,7 +370,7 @@
     \path (b42.north west)+(0,0) node (b42nw) {};
     \path (b42.south west)+(0,0) node (b42sw) {};
     \path (b42.south east)+(0,0) node (b42se) {};
-    \path (b42.south)+(0,0) node (b32s) {};
+    \path (b42.south)+(0,0) node (b42s) {};
     \path (b42.south |- b42.west)+(-0.35,-0.55) node (a2x) {};
     \path (b42.north |- b42.east)+(+0.35,+0.55) node (a2y) {};         
     \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
@@ -379,6 +398,53 @@
     \path (b45.west)+(0,0) node (b45w) {};
     \path (b45.south |- b45.west)+(-0.65,-0.40) node (a2x) {};
     \path (b45.north |- b45.east)+(+0.65,+0.40) node (a2y) {};         
+    \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
+    (a2x) rectangle (a2y);
+    %%%%%%%%%%%%%
+
+    \path (b51.north west)+(0,0.45) node {$n_4{\cdot}\textrm{p}{\cdot}0$};
+    \path (b51.south west)+(0,0) node (b51sw) {};
+    \path (b51.west)+(0,0) node (b51w) {};
+    \path (b51.north west)+(0,0) node (b51nw) {};
+    \path (b51.south |- b51.west)+(-0.35,-0.55) node (a2x) {};
+    \path (b51.north |- b51.east)+(+0.35,+0.55) node (a2y) {};         
+    \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
+    (a2x) rectangle (a2y);
+
+    \path (b52.north west)+(0,0.45) node {$n_4{\cdot}\textrm{p}{\cdot}1$};
+    \path (b52.west)+(0,0) node (b52w) {};
+    \path (b52.north west)+(0,0) node (b52nw) {};
+    \path (b52.south west)+(0,0) node (b52sw) {};
+    \path (b52.south east)+(0,0) node (b52se) {};
+    \path (b52.south)+(0,0) node (b52s) {};
+w    \path (b52.south)+(0,0) node (b32s) {};
+    \path (b52.south |- b52.west)+(-0.35,-0.55) node (a2x) {};
+    \path (b52.north |- b52.east)+(+0.35,+0.55) node (a2y) {};         
+    \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
+    (a2x) rectangle (a2y);
+
+    \path (b53.north west)+(0,0.45) node {$n_4{\cdot}\textrm{p}{\cdot}2$};
+    \path (b53.west)+(0,0) node (b53w) {};
+    \path (b53.north west)+(0,0) node (b53nw) {};
+    \path (b53.south west)+(0,0) node (b53sw) {};
+    \path (b53.south |- b53.west)+(-0.35,-0.55) node (a2x) {};
+    \path (b53.north |- b53.east)+(+0.35,+0.55) node (a2y) {};         
+    \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
+    (a2x) rectangle (a2y);
+
+    \path (b54.north west)+(0,0.45) node {$n_4{\cdot}\textrm{p}{\cdot}3$};
+    \path (b54.west)+(0,0) node (b54w) {};
+    \path (b54.north west)+(0,0) node (b54nw) {};
+    \path (b54.south)+(0,0) node (b54s) {};
+    \path (b54.south |- b54.west)+(-0.35,-0.55) node (a2x) {};
+    \path (b54.north |- b54.east)+(+0.35,+0.55) node (a2y) {};         
+    \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
+    (a2x) rectangle (a2y);
+
+    \path (b55.north west)+(0,0.45) node {$n_4{\cdot}\textrm{p}{\cdot}4$};
+    \path (b55.west)+(0,0) node (b55w) {};
+    \path (b55.south |- b55.west)+(-0.65,-0.40) node (a2x) {};
+    \path (b55.north |- b55.east)+(+0.65,+0.40) node (a2y) {};         
     \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
     (a2x) rectangle (a2y);
 
@@ -443,19 +509,36 @@
 
     \path (a5.north)+(0,0)            node (a5n) {};
     \path (a5.east)+(0,0)             node (a5e) {};
-    \path (a5.north |- a5.west)+(-0.42,-0.38) node (a2x) {};
-    \path (a5.south |- a5.east)+(+0.42,+0.38) node (a2y) {};
+    \path (a5.north |- a5.west)+(-0.45,-0.85) node (a2x) {};
+    \path (a5.south |- a5.east)+(+0.45,+0.85) node (a2y) {};
     \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
     (a2x) rectangle (a2y);
     \draw (a5.north west)+(-10pt,0) node {$a_5$};
 
+    \path (o5.north) node (o5n) {};
     \path (o5.east) node (o5e) {};
-    \path (o5.south |- o5.west)+(-13pt,-10pt) node (a1x) {};
-    \path (o5.north |- o5.east)+(+13pt,+10pt) node (a1y) {};
+    \path (o5.south |- o5.west)+(-0.45,-0.85) node (a1x) {};
+    \path (o5.north |- o5.east)+(+0.45,+0.85) node (a1y) {};
     \path[fill=green!10,rounded corners, draw=black, line width=1.5pt, label=west:p1]
     (a1x) rectangle (a1y);
-    \draw (o5.north west)+(-10pt,0) node {$a_5$};
+    \draw (o5.north west)+(-10pt,0) node {$n_5$};
 
+
+    \path (a6.north)+(0,0)            node (a6n) {};
+    \path (a6.east)+(0,0)             node (a6e) {};
+    \path (a6.north |- a6.west)+(-0.42,-0.38) node (a2x) {};
+    \path (a6.south |- a6.east)+(+0.42,+0.38) node (a2y) {};
+    \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
+    (a2x) rectangle (a2y);
+    \draw (a6.north west)+(-10pt,0) node {$a_6$};
+    
+    \path (o6.east) node (o6e) {};
+    \path (o6.south |- o6.west)+(-13pt,-10pt) node (a1x) {};
+    \path (o6.north |- o6.east)+(+13pt,+10pt) node (a1y) {};
+    \path[fill=green!10,rounded corners, draw=black, line width=1.5pt, label=west:p1]
+    (a1x) rectangle (a1y);
+    \draw (o6.north west)+(-10pt,0) node {$a_6$};
+    
     \path (b24.west)+(0,0)            node (b24w) {};
     \path (b24.north |- b24.west)+(-0.35,-0.55) node (a2x) {};
     \path (b24.south |- b24.east)+(+0.35,+0.55) node (a2y) {};
@@ -476,47 +559,46 @@
     \path (b11-tail) ;
 
     % Input pointer: a1 tail
-    \path[fill=black, draw=black,>=stealth,thick] (a1.third)+(0.091,0.1) circle (1.3pt) edge[->] (a2n) {};
-    \path[fill=black, draw=black,>=stealth,thick] (o1.third)+(0.091,0.1) circle (1.3pt) edge[->] (o2n) {};
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (a1.third)+(0.091,0.1) circle (1.3pt) edge[->] (a2n) {};
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o1.third)+(0.091,0.1) circle (1.3pt) edge[->] (o2n) {};
     
-    % Thunk effects: a1t
+    % Thunk allocation effects: a1t
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a1t.lower)+(0,0) edge[->] (b11w) node [below=2pt] {};
     
     % Path chain
     \draw (b11)+(0.021,.18) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b11.second)+(0.091,.071) circle (1.3pt) edge[->] (b12w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b11.second)+(0.091,.071) circle (1.3pt) edge[->] (b12w) {};
 
     \draw (b12.second)+(0.091,.071) node[nilcross] {};
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b12)+(0.021,.18) circle (1.3pt) edge[->] (b13w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b12)+(0.021,.18) circle (1.3pt) edge[->] (b13w) {};
 
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b13)+(0.021,.18) circle (1.3pt) edge[->] (b14w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b13)+(0.021,.18) circle (1.3pt) edge[->] (b14w) {};
     \draw (b13.second)+(0.091,0.071) node[nilcross] {};
 
     \draw (b14)+(0.021,0.18) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b14.second)+(0.091,.071) circle (1.3pt) edge[->] (b15w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b14.second)+(0.091,.071) circle (1.3pt) edge[->] (b15w) {};
 
-    \path[fill=black, draw=black,>=stealth,thick] (a2.third)+(0.091,0.1) circle (1.3pt) edge[->] (a3n) {};
-    \path[fill=black, draw=black,>=stealth,thick] (o2.third)+(0.091,0.1) circle (1.3pt) edge[->] (o4n) {};
-
-    % Thunk effects: a2t
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (a2.third)+(0.091,0.1) circle (1.3pt) edge[->] (a3n) {};
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o2.third)+(0.091,0.1) circle (1.3pt) edge[->] (o4n) {};
+   
+    % Thunk allocation effects: a2t
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a2t.lower)+(0,0) edge[->] (b21w) node [below=2pt] {};
 
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b21.second)+(0.091,.071) circle (1.3pt) edge[->] (b12s) {};
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b21)+(0.021,.18) circle (1.3pt) edge[->] (b22w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b21.second)+(0.091,.071) circle (1.3pt) edge[->] (b12s) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b21)+(0.021,.18) circle (1.3pt) edge[->] (b22w) {};
 
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b22)+(0.021,.18) circle (1.3pt) edge[->] (b23) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b22)+(0.021,.18) circle (1.3pt) edge[->] (b23) {};
     \draw (b22.second)+(0.091,.071) node[nilcross] {};
 
     \path (b23)+(0.021,.18) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b23.second)+(0.091,.071) circle (1.3pt) edge[->] (b24w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b23.second)+(0.091,.071) circle (1.3pt) edge[->] (b24w) {};
 
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b24)+(0.021,.18) circle (1.3pt) edge[->] (b25w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b24)+(0.021,.18) circle (1.3pt) edge[->] (b25w) {};
     \path (b24.second)+(0.091,.071) node[nilcross] {};
 
-    \path[fill=black, draw=black,>=stealth,thick] (a3.third)+(0.091,0.1) circle (1.3pt) edge[->] (a4n) {};
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (a3.third)+(0.091,0.1) circle (1.3pt) edge[->] (a4n) {};
 
-
-    % Thunk effects: a3t
+    % Thunk allocation effects: a3t
     %\path[bend right,fill=blue!50!black, draw=blue!50!black,line width=3pt] (a3t)+(0,0.1) edge[->] (a3e) node [above=2pt] {};
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a3t.lower)+(0,0) edge[->] (b31w) node [below=2pt] {};
     %\path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a3t)+(0,-9pt) edge[->] (a4t);
@@ -525,42 +607,63 @@
     %\path[bend right,draw=black,fill=black,>=stealth,thick] (b32)+(0.021,.18)  circle (1.3pt) edge[->] (b33) {};
     %\path[bend right,draw=black,fill=black,>=stealth,thick] (b33)+(0.021,.18)  circle (1.3pt) edge[->] (b34) {};
 
-    \path[fill=black,draw=black,>=stealth,thick] (a4.third)+(0.1,0.1) circle (1.3pt) edge[->] (a5n) {};
+    \path[fill=black,draw=black,>=stealth,thick, line width=1.2pt] (a4.third)+(0.1,0.1) circle (1.3pt) edge[->] (a5n) {};
 
     % Path chain
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b31)+(0.021,.18)         circle (1.3pt) edge[->] (b22s) {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b31.second)+(0.091,.071) circle (1.3pt) edge[->] (b32w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b31)+(0.021,.18)         circle (1.3pt) edge[->] (b22s) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b31.second)+(0.091,.071) circle (1.3pt) edge[->] (b32w) {};
 
     \draw (b32.second)+(0.091,.071) node[nilcross] {};
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b32)+(0.021,.18) circle (1.3pt) edge[->] (b33w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b32)+(0.021,.18) circle (1.3pt) edge[->] (b33w) {};
 
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b33)+(0.021,.18) circle (1.3pt) edge[->] (b34w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b33)+(0.021,.18) circle (1.3pt) edge[->] (b34w) {};
     \draw (b33.second)+(0.091,0.071) node[nilcross] {};
 
     \draw (b34)+(0.021,0.18) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b34.second)+(0.091,.071) circle (1.3pt) edge[->] (b35w) {};
-
-
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b34.second)+(0.091,.071) circle (1.3pt) edge[->] (b35w) {};
    
-    % Thunk effects: a4t
+    % Thunk allocation effects: a4t
     %
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a4t.lower)+(0,0) edge[->] (b41w) node [below=2pt] {};
     %\path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a4t)+(0,-9pt) edge[->] (a5t);
 
-    \path[bend right=40mm,draw=black,fill=black,>=stealth,thick] (b41)       +(0.021,.18)   circle (1.3pt) edge[->] (b22s) {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b41.second)+(0.091,.071)  circle (1.3pt) edge[->] (b42w) {};
+    \path[bend right=40mm,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b41)       +(0.021,.18)   circle (1.3pt) edge[->] (b22s) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b41.second)+(0.091,.071)  circle (1.3pt) edge[->] (b42w) {};
     
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b42)+(0.021,.18)  circle (1.3pt) edge[->] (b43w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b42)+(0.021,.18)  circle (1.3pt) edge[->] (b43w) {};
     \path (b42.second)+(0.091,.071)  node[nilcross] {};
 
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b43)+(0.021,.18)          circle (1.3pt) edge[->] (b34s) {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick] (b43.second)+(0.091,.071)  circle (1.3pt) edge[->] (b44w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b43)+(0.021,.18)          circle (1.3pt) edge[->] (b34s) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b43.second)+(0.091,.071)  circle (1.3pt) edge[->] (b44w) {};
         
-    \path[bend left,draw=black,fill=black,>=stealth,thick] (b44)+(0.021,.18)  circle (1.3pt) edge[->] (b45w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b44)+(0.021,.18)  circle (1.3pt) edge[->] (b45w) {};
     \path (b44.second)+(0.091,.071)  node[nilcross] {};
 
-    % Thunk effects: a5t
+    % Thunk allocation effects: a5t
     %
+    %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a4t.lower)+(0,0) edge[->] (b41w) node [below=2pt] {};
+    %\path[fill=blue!30!white, draw=blue!20!white,line width=4pt,>=stealth] (a4t)+(0,-9pt) edge[->] (a5t);
+
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b51)       +(0.021,.18)   circle (1.3pt) edge[->] (b52w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b51.second)+(0.091,.071)  circle (1.3pt) edge[->] (b42s) {};
+
+    \path[bend right=75mm,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b52)       +(0.021,.18)   circle (1.3pt) edge[->] (b23se) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b52.second)+(0.091,.071)  circle (1.3pt) edge[->] (b53w) {};
+
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b53)+(0.021,.18)          circle (1.3pt) edge[->] (b54w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b53.second)+(0.091,.071)  node[nilcross] {};
+        
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b54)+(0.021,.18)  node[nilcross] {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b54.second)+(0.091,.071)  circle (1.3pt) edge[->] (b55w) {};
+
+    \path (b44.second)+(0.091,.071)  node[nilcross] {};
+
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o4.third)+(0.091,0.1) circle (1.3pt) edge[->] (o5n) {};
+    \path[fill=black,draw=black,>=stealth,thick, line width=1.2pt] (a5.third)+(0.1,0.1) circle (1.3pt) edge[->] (a6n) {};
+
+    % Thunk allocation effects: a5t
+    %
+    \path[bend left=8mm, fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o5.third)+(0.091,0.1) circle (1.3pt) edge[->] (o6e) {};
 
 
   \end{pgfonlayer}
@@ -610,8 +713,18 @@
     
     \path[dotted, fill=blue!30!white, draw=blue!20!white,line width=6pt] (a4t)+(0,-9pt) edge[->] (a5t);
 
-    %a5
-    \path[dotted, fill=blue!30!white, draw=blue!30!white,line width=3pt] (a5t) edge[->] (a5e) node [above=2pt] {};
+    %a5    
+    \path[dotted,           fill=blue!30!white, draw=blue!30!white,line width=3pt] (a5t) edge[->] (a5e) node [above=2pt] {};    
+    \path[dotted, bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a5t) edge[->] (b41sw)+(0,-0.1) node [above=3pt] {};
+    \path[dotted, bend right=60mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a5t) edge[->] (b22se)+(0,-0.1) node [above=3pt] {};
+    %\path[dotted, bend right=40mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a5t) edge[->] (b43sw)+(0,-0.1) node [above=3pt] {};
+    %\path[bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a4t) edge[->] (b14sw)+(0,-0.1) node [above=3pt] {};
+    %\path[bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a4t) edge[->] (b15sw)+(0,-0.1) node [above=3pt] {};
+    
+    \path[dotted, fill=blue!30!white, draw=blue!20!white,line width=6pt] (a5t)+(0,-9pt) edge[->] (a6t);
+
+    %a6
+    \path[dotted, fill=blue!30!white, draw=blue!30!white,line width=3pt] (a6t) edge[->] (a6e) node [above=2pt] {};
 
   \end{pgfonlayer}
   
