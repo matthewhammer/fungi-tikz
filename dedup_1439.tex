@@ -534,17 +534,17 @@
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a1t.lower)+(0,0) edge[->] (b11w) node [below=2pt] {};
     
     % Path chain
-    \draw (b11)+(0.021,.18) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b11.second)+(0.091,.071) circle (1.3pt) edge[->] (b12w) {};
+    \draw (b11.second)+(0.091,.071) node[nilcross] {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b11)+(0.021,.18) circle (1.3pt) edge[->] (b12w) {};
 
-    \draw (b12.second)+(0.091,.071) node[nilcross] {};
-    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b12)+(0.021,.18) circle (1.3pt) edge[->] (b13w) {};
+    \draw (b12)+(0.021,.18) node[nilcross] {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b12.second)+(0.091,.071) circle (1.3pt) edge[->] (b13w) {};
 
-    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b13)+(0.021,.18) circle (1.3pt) edge[->] (b14w) {};
-    \draw (b13.second)+(0.091,0.071) node[nilcross] {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b13.second)+(0.091,0.071) circle (1.3pt) edge[->] (b14w) {};
+    \draw (b13)+(0.021,.18) node[nilcross] {};
 
-    \draw (b14)+(0.021,0.18) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b14.second)+(0.091,.071) circle (1.3pt) edge[->] (b15w) {};
+    \draw (b14.second)+(0.091,.071) node[nilcross] {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b14)+(0.021,0.18) circle (1.3pt) edge[->] (b15w) {};
 
     \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (a2.third)+(0.091,0.1) circle (1.3pt) edge[->] (a3n) {};
     \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o2.third)+(0.091,0.1) circle (1.3pt) edge[->] (o3n) {};
