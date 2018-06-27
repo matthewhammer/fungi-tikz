@@ -237,6 +237,8 @@
     \path (b13.west)+(0,0) node (b13w) {};
     \path (b13.north west)+(0,0) node (b13nw) {};
     \path (b13.south west)+(0,0) node (b13sw) {};
+    \path (b13.south east)+(0,0) node (b13se) {};
+    \path (b13.south)+(0,0) node (b13s) {};
     \path (b13.south |- b13.west)+(-0.35,-0.55) node (a2x) {};
     \path (b13.north |- b13.east)+(+0.35,+0.55) node (a2y) {};         
     \path[fill=green!10,rounded corners, line width=1.5pt, draw=black]
@@ -506,7 +508,8 @@
     \path[fill=green!10,rounded corners, draw=black, line width=1.5pt, label=west:p1]
     (a1x) rectangle (a1y);
     \draw (o6.north west)+(-10pt,0) node {$a_5$};
-    
+
+    \path (b24.north west)+(0,0.45) node {$n_2{\cdot}\textrm{p}{\cdot}3$};
     \path (b24.west)+(0,0)            node (b24w) {};
     \path (b24.north |- b24.west)+(-0.35,-0.55) node (a2x) {};
     \path (b24.south |- b24.east)+(+0.35,+0.55) node (a2y) {};
@@ -535,28 +538,30 @@
     
     % Path chain
     \draw (b11.second)+(0.091,.071) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b11)+(0.021,.18) circle (1.3pt) edge[->] (b12w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b11)+(0.021,.18) circle (1.3pt) edge[->] (b12w) {};
 
     \draw (b12)+(0.021,.18) node[nilcross] {};
-    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b12.second)+(0.091,.071) circle (1.3pt) edge[->] (b13w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b12.second)+(0.091,.071) circle (1.3pt) edge[->] (b13w) {};
 
-    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b13.second)+(0.091,0.071) circle (1.3pt) edge[->] (b14w) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b13.second)+(0.091,0.071) circle (1.3pt) edge[->] (b14w) {};
     \draw (b13)+(0.021,.18) node[nilcross] {};
 
     \draw (b14.second)+(0.091,.071) node[nilcross] {};
-    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b14)+(0.021,0.18) circle (1.3pt) edge[->] (b15w) {};
+    \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b14)+(0.021,0.18) circle (1.3pt) edge[->] (b15w) {};
 
     \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (a2.third)+(0.091,0.1) circle (1.3pt) edge[->] (a3n) {};
     \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o2.third)+(0.091,0.1) circle (1.3pt) edge[->] (o3n) {};
+
+    \path[fill=black, draw=black,>=stealth,thick, line width=1.2pt] (o3.third)+(0.091,0.1) circle (1.3pt) edge[->] (o4n) {};
    
     % Thunk allocation effects: a2t
     %\path[bend right,fill=green!50!black, draw=blue!50!white,line width=3pt] (a2t.lower)+(0,0) edge[->] (b21w) node [below=2pt] {};
 
-    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b21.second)+(0.091,.071) circle (1.3pt) edge[->] (b12s) {};
+    \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b21.second)+(0.091,.071) node[nilcross] {};
     \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b21)+(0.021,.18) circle (1.3pt) edge[->] (b22w) {};
 
     \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b22)+(0.021,.18) circle (1.3pt) edge[->] (b23) {};
-    \draw (b22.second)+(0.091,.071) node[nilcross] {};
+    \draw[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b22.second)+(0.091,.071) circle (1.3pt) edge[->] (b13s) {}; %xxx
 
     \path (b23)+(0.021,.18) node[nilcross] {};
     \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (b23.second)+(0.091,.071) circle (1.3pt) edge[->] (b24w) {};
@@ -653,9 +658,9 @@
 
     %a2    `
     %\path (a2t) edge[dcgedge,->] (b11sw) node [above=3pt] {};
-    \path[dotted, bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a2t) edge[->] (b11sw) node [above=3pt] {};
+    \path[dotted, bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a2t) edge[->] (b11sw) node [above=3pt] {};    
+    \path[dotted, bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a2t) edge[->] (b12sw) node [above=3pt] {};
     
-    %\path[bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a2t) edge[->] (b12sw) node [above=3pt] {};
     %\path[bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a2t) edge[->] (b13sw) node [above=3pt] {};
     \path[dotted,            fill=blue!30!white, draw=blue!30!white,line width=3pt] (a2t) edge[->] (a2e) node [above=2pt] {};
 
@@ -663,11 +668,11 @@
 
     %a3
     \path[dotted, bend right,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b21sw)+(0,-0.1) node [above=3pt] {};
-    \path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b12sw)+(0,-0.1) node [above=3pt] {};
-    \path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b13sw)+(0,-0.1) node [above=3pt] {};
-    \path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b14sw)+(0,-0.1) node [above=3pt] {};
-    \path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b15sw)+(0,-0.1) node [above=3pt] {};
-    \path[dotted,            fill=blue!30!white, draw=blue!30!white,line width=3pt] (a3t) edge[->] (a3e) node [above=2pt] {};
+    %\path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b12sw)+(0,-0.1) node [above=3pt] {};
+    %\path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b13sw)+(0,-0.1) node [above=3pt] {};
+    %\path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b14sw)+(0,-0.1) node [above=3pt] {};
+    %\path[dotted, bend right=50mm,fill=blue!30!white, draw=blue!30!white,line width=2pt] (a3t) edge[->] (b15sw)+(0,-0.1) node [above=3pt] {};
+    %\path[dotted,            fill=blue!30!white, draw=blue!30!white,line width=3pt] (a3t) edge[->] (a3e) node [above=2pt] {};
 
     \path[dotted, fill=blue!30!white, draw=blue!20!white,line width=6pt] (a3t) edge[->] (a4t);
 
@@ -695,6 +700,12 @@
     \path[dotted, fill=blue!30!white, draw=blue!30!white,line width=3pt] (a5t) edge[->] (a5e) node [above=2pt] {};
 
   \end{pgfonlayer}
+
+  \begin{pgfonlayer}{dcgeffects}
+
+
+  \end{pgfonlayer}
+
   
   %\begin{pgfonlayer}{background}
   %  \path [draw, ->] (b11.second east) edge[bend  left=10]  node [below] {} (b12);
