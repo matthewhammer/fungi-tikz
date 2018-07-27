@@ -1,0 +1,53 @@
+\begin{figure}
+\begin{tabular}{c@{\hspace{10pt}}|@{\hspace{10pt}}c}
+\begin{lstlisting}
+idxtm Dedup : NmSet idx-> NmSet
+  = lam~X.<~@t~>~@@~(Insert X) ^ <~@dd~>~@@~X ^ <~@r~>~@@~X
+
+dedup : forall~X1^X2:NmSet.
+  List[[X1]] -> Trie[[X2]] -> List[[X1]] 
+  writeset~[[Dedup X1]]
+
+dedup l t =
+  match (get l) with
+  Nil => l
+  Cons x y ys =>
+    let (tx,b) = scope<[@t]> insert x y t
+    let ddys = thunk<[@dd~@~x]>[<dedup ys tx>]
+    if b then force ddys else
+      ref<[@r~@~x]>(Cons x y (force ddys))
+\end{lstlisting}
+&
+\begin{lstlisting}
+type List[[X]] = Ref(ListNode[[X]])
+
+type ListNode : NmSet idx=> Type
+  Nil  : forall~X:NmSet. ListNode[[X]]
+  Cons : forall~X1^X2:NmSet.
+    Nm[[X1]] -> Nat -> List[[X2]] -> 
+    ListNode[[X1^X2]]
+
+type Trie[[X]] = Ref(TrieNode[[X]])
+
+idxtm Insert : NmSet idx-> NmSet
+insert : forall~X1^X2:NmSet. 
+  Nm[[X1]] -> Nat -> Trie[[X2]] -> 
+   (Trie[[X1^X2]], Bool) 
+   writeset~[[Insert X1]]
+\end{lstlisting}
+\end{tabular}
+\caption{The effect, type and code listing for \code{dedup} (left), and definitions for linked lists and hash tries (right).}
+\label{fig:dedup}
+%
+%\end{figure}
+%\begin{figure}
+% 
+  \vspace{10pt}
+  \hspace{-0.9in}
+  \includegraphics[width=\textwidth]{dedup_x4x}
+  \vspace{-30pt}
+  \caption{The static variables of~\code{dedup} (left column), and their dynamic values and structure (to the right),
+    \\
+    for the second iteration of \code{dedup} on the input list $[3,4,3,9]$, where the list element~\code{y} is~$4$.}
+\label{fig:dedup-x4x}
+\end{figure}

@@ -1,0 +1,295 @@
+% \renewcommand{\ttdefault}{pcr}
+
+\pgfdeclarelayer{dcgbackground}
+\pgfdeclarelayer{dcgeffects}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfdeclarelayer{tiles}
+\pgfdeclarelayer{nodes}
+\pgfdeclarelayer{staticdynamic}
+
+\pgfsetlayers{tiles,dcgeffects,dcgbackground,background,nodes,main,foreground,staticdynamic}
+
+\newcommand{\LstVar}[1]{\large \texttt{#1}}
+\newcommand{\Num}[1]{\large #1}
+%\newcommand{\Num}[1]{\large \textbf{#1}}
+%\newcommand{\NmStr}[1]{\texttt{#1}}
+\newcommand{\NmStr}[1]{\textbf{\textsf{#1}}}
+\newcommand{\NmNum}[1]{\textbf{\textsf{#1}}}
+%\newcommand{\NmBinOp}[2]{(#1{\cdot}#2)}
+\newcommand{\NmBinOp}[2]{#1{\cdot}#2}
+\newcommand{\False}[0]{\textbf{\texttt{False}}}
+
+\newcommand{\RefNil}[2]{
+  \path (#1.north)+(0,0)            node (#1n) {};
+  \path (#1.east)+(0,0)             node (#1e) {};
+  \path (#1.north |- #1.west)+(-0.42,-0.38) node (a2x) {};
+  \path (#1.south |- #1.east)+(+0.42,+0.38) node (a2y) {};
+  \path[fill=violet!10,rounded corners, line width=1.5pt, draw=black]
+  (a2x) rectangle (a2y);
+  \draw (#1.north west)+(-10pt,0) node {$a_5$};
+}
+\newcommand{\RefCons}[2]{
+  \path (#1.north)+(0,0)            node (#1n) {};
+  \path (#1.east)+(0,0)             node (#1e) {};
+  \path (#1.west)+(0,0)             node (#1w) {};
+  \path (#1.north |- #1.west)+(-0.45,-0.85) node (#1x) {};
+  \path (#1.south |- #1.east)+(+0.45,+0.85) node (#1y) {};
+  \path[fill=violet!10,rounded corners, line width=1.5pt, draw=black]
+  (#1x) rectangle (#1y);
+  \draw (#1.north west)+(-12pt,0) node (#1nw) {#2};
+}
+\newcommand{\RefConsOut}[2]{
+  \path (#1.north)+(0,0)            node (#1n) {};
+  \path (#1.east)+(0,0)             node (#1e) {};
+  \path (#1.north |- #1.west)+(-0.45,-0.85) node (#1x) {};
+  \path (#1.south |- #1.east)+(+0.45,+0.85) node (#1y) {};
+  \path[fill=violet!10,rounded corners, line width=1.5pt, draw=black]
+  (#1x) rectangle (#1y);
+  \draw (#1.north west)+(-16pt,0) node {#2};
+}
+\newcommand{\RefConsC}[2]{
+  \path (#1.north)+(0,0)            node (#1n) {};
+  \path (#1.east)+(0,0)             node (#1e) {};
+  \path (#1.north |- #1.west)+(-0.45,-0.85) node (#1x) {};
+  \path (#1.south |- #1.east)+(+0.45,+0.85) node (#1y) {};
+  \path[fill=violet!10,rounded corners, line width=1.5pt, draw=black]
+  (#1x) rectangle (#1y);
+  \draw (#1.north west)+(-18pt,0) node {#2}; %% <-- 'C' means change; so, extra space on this line
+}
+\newcommand{\RefTrie}[2]{
+  \path (#1.north)+(0,0.45) node {#2};
+  \path (#1.south)+(0,0) node (#1s) {};
+  \path (#1.west)+(0,0) node (#1w) {};
+  \path (#1.east)+(0,0) node (#1e) {};
+  \path (#1.south west)+(0,0) node (#1sw) {};
+  \path (#1.north west)+(0,0) node (#1nw) {};
+  \path (#1.south |- #1.west)+(-0.35,-0.55) node (#1x) {};
+  \path (#1.north |- #1.east)+(+0.35,+0.55) node (#1y) {};         
+  \path[reftrie]
+  (#1x) rectangle (#1y);
+}
+\newcommand{\RefLeaf}[2]{
+  \path (#1.north)+(0,0.45) node {#2};
+  \path (#1.west)+(0,0) node (#1w) {};
+  \path (#1.south west)+(0,0) node (#1sw) {};
+  \path (#1.south |- #1.west)+(-0.65,-0.40) node (#1x) {};
+  \path (#1.north |- #1.east)+(+0.65,+0.40) node (#1y) {};         
+  \path[refleaf]
+  (#1x) rectangle (#1y);
+}
+\newcommand{\RefLeafC}[2]{
+  \path (#1.north)+(0,0.55) node {#2};
+  \path (#1.west)+(0,0) node (#1w) {};
+  \path (#1.south west)+(0,0) node (#1sw) {};
+  \path (#1.south |- #1.west)+(-0.65,-0.40) node (#1x) {};
+  \path (#1.north |- #1.east)+(+0.65,+0.40) node (#1y) {};         
+  \path[refleaf]
+  (#1x) rectangle (#1y);
+}
+\newcommand{\ThunkReEval}[1]{
+    \path (#1.south |- #1.west)+(-0.85,-0.80) node (#1x) {};
+    \path (#1.north |- #1.east)+(+0.85,+0.80) node (#1y) {};
+    \path[thunkreeval] (#1x) rectangle (#1y);
+}
+\newcommand{\RefConsChange}[1]{
+    \path (#1.south |- #1.west)+(-0.60,-0.95) node (#1x) {};
+    \path (#1.north |- #1.east)+(+0.60,+0.95) node (#1y) {};
+    \path[refchange] (#1x) rectangle (#1y);
+}
+\newcommand{\RefTrieChange}[1]{
+    \path (#1.south |- #1.west)+(-0.45,-0.65) node (#1x) {};
+    \path (#1.north |- #1.east)+(+0.45,+0.65) node (#1y) {};
+    \path[refchange] (#1x) rectangle (#1y);
+}
+\newcommand{\RefLeafChange}[1]{
+    \path (#1.south |- #1.west)+(-0.75,-0.55) node (#1x) {};
+    \path (#1.north |- #1.east)+(+0.75,+0.55) node (#1y) {};
+    \path[refchange]
+    (#1x) rectangle (#1y);
+}
+\newcommand{\ConsTailPtr}[2]{
+         \path[refptr] (#1.third)+(0.091,0.1) circle (1.3pt) edge[->] (#2) {};
+}
+\newcommand{\ConsTailPtrBend}[3]{
+         \path[refptr,#3] (#1.third)+(0.091,0.1) circle (1.3pt) edge[->] (#2) {};
+}
+\newcommand{\LeftNilPtr}[1]{
+        \draw (#1)+(0.021,.18) node[nilcross] {};
+}
+\newcommand{\RightNilPtr}[1]{
+        \draw (#1.second)+(0.091,.071) node[nilcross] {};
+}
+\newcommand{\LeftRefPtr}[2]{
+        \path[bend left,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (#1)+(0.021,.18) circle (1.3pt) edge[->] (#2) {};
+}
+\newcommand{\LeftRefPtrBend}[3]{
+        \path[draw=black,fill=black,>=stealth,thick, line width=1.2pt,#3] (#1)+(0.021,.18) circle (1.3pt) edge[->] (#2) {};
+}
+\newcommand{\RightRefPtr}[2]{
+        \path[bend right,draw=black,fill=black,>=stealth,thick, line width=1.2pt] (#1.second)+(0.091,.071) circle (1.3pt) edge[->] (#2) {};
+}
+\newcommand{\MysRefPtr}[2]{
+        \path[draw=black,fill=black,>=stealth,thick, line width=1.2pt] (#1) circle (0pt) edge[->] (#2) {};
+}
+\newcommand{\RightRefPtrBend}[3]{
+        \path[draw=black,fill=black,>=stealth,thick, line width=1.2pt,#3] (#1.second)+(0.091,.071) circle (1.3pt) edge[->] (#2) {};
+}
+\tikzset{
+  lstvarptr/.style={
+     dotted, fill=gray!70!white, draw=gray!70!white,line width=1pt,
+  },
+  reftrie/.style={
+    fill=violet!10,rounded corners, line width=1.5pt, draw=black
+  },
+  refleaf/.style={
+    fill=violet!10,rounded corners, line width=1.5pt, draw=black
+  },
+  nilcross/.style={strike out, draw=black, minimum size=3.6mm, inner sep=0pt, outer sep=0pt, line width=1.2pt},
+  %default radius will be 1pt.
+  dcgrefget/.style={
+    dotted, fill=blue!30!white, draw=blue!30!white,line width=4pt
+  },
+  dcgthunkforce/.style={
+    dotted, fill=blue!30!white, draw=blue!30!white,line width=6pt
+  },
+  REDOdcgrefget/.style={
+    dotted, fill=blue!90!white, draw=blue!90!white,line width=4pt
+  },
+  REDOdcgthunkforce/.style={
+    dotted, fill=blue!90!white, draw=blue!90!white,line width=6pt
+  },
+  refptr/.style={
+        fill=black, draw=black,>=stealth,thick, line width=1.2pt
+  },           
+  ptrsnd/.style={
+    bend left,
+    draw=black,
+    fill=black,
+    >=stealth,
+    thick
+  },
+  lstvar/.style={
+      dotted,
+      rectangle, 
+      very thick, 
+      draw=gray!80, 
+      fill=gray!05,
+      node distance=10pt,
+    },
+    pointer/.style={    
+      draw=black,
+      text centered,
+      fill=black,
+      circle,
+    },
+    nil/.style={
+      fill=yellow!05,
+      rectangle split,
+      rectangle split parts=1,
+      draw,
+      text centered,
+    },
+    cons/.style={
+      baseline=-.5ex,
+      fill=yellow!05,
+      rectangle split,
+      rectangle split parts=2,
+      rectangle split horizontal,
+      draw,
+      text centered,
+      minimum size=5mm,
+    },
+    leaf/.style={
+      baseline=-.5ex,
+      fill=orange!05,
+      rectangle split,
+      rectangle split parts=2,
+      rectangle split horizontal,
+      draw,
+      text centered,
+      minimum size=5mm,
+    },
+    thunk/.style={
+      text width=15mm,
+      fill=blue!05,
+      rectangle,
+      rounded corners=4mm,
+      draw,
+      line width=1.5pt,
+      text centered,
+      minimum size=15mm,
+    },
+    thunkreeval/.style={
+      snake=bumps, segment length=12pt, segment amplitude=1.5mm, fill=blue!40, line width=0.5pt, draw=blue
+    },
+    refchange/.style={
+      snake=zigzag, segment length=5pt, segment amplitude=0.5mm, fill=red!40, line width=1pt, draw=red
+    },
+    pad/.style={
+      rectangle,
+      minimum size=10mm,
+    },
+    xpad/.style={
+      circle=0mm,
+    },
+    xpadt/.style={
+      circle=0mm,
+      minimum size=15mm,
+    },
+    xpadConsV/.style={
+      circle=0mm,
+      minimum size=9mm,
+    },
+    xpadTrie/.style={
+      circle=0mm,
+      minimum size=5mm,
+    },
+    xpadLeaf/.style={
+      circle=0mm,
+      minimum size=13mm,
+    },
+    apad/.style={
+      circle=0mm, node distance=2mm,
+    },
+    smallpad/.style={
+      node distance=0mm, circle=0mm,
+    },
+    prepad/.style={
+      circle=0mm, node distance=0mm,
+    },
+    postpad/.style={
+      circle=0mm, node distance=4mm,
+    },
+    trie/.style={
+      fill=orange!05,
+      rectangle split,
+      rectangle split parts=2,
+      draw,
+      text centered,
+      minimum size=5mm,
+    },
+    consV/.style={
+      fill=yellow!05,
+      rectangle split,
+      rectangle split parts=3,
+      draw,
+      text centered,
+      minimum size=5mm,
+    },
+    dcgedge/.style={
+      bend right,
+      fill=blue!50!white,
+      draw=blue!50!white,
+      line width=2pt
+    }
+    terminal/.style={
+      rectangle,minimum size=6mm,rounded corners=3mm,
+      very thick,draw=black!30,
+      top color=white,bottom color=black!20,
+      font=\ttfamily
+    },
+    node distance=6mm,
+    every on chain/.style={},
+    every join/.style=
+}

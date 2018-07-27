@@ -1,0 +1,181 @@
+\begin{tikzpicture}
+  { [start chain]    
+    [start branch=a1]
+    \node (a1) [xpadConsV,on chain=going below] {};
+    {
+      [start branch=a1t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a1t) [xpadt,on chain=going right] {};
+    }
+    {
+      [start branch=static1]
+      \node (varl)    [lstvar, node distance=55pt, on chain=going left] {\LstVar{l}};
+      \node (vart)    [lstvar,on chain=going right] {\LstVar{t}};
+      \node (varx)    [lstvar,node distance=10pt, on chain=going below left] {\LstVar{x} = $n_2$};
+      \node (vary)    [lstvar,node distance=10pt, on chain=going below] {\LstVar{y} = $4$};
+      \node (varys)   [lstvar,node distance=10pt, on chain=going below] {\LstVar{ys}};
+      \node (vartx)   [lstvar,node distance=10pt, on chain=going below] {\LstVar{tx}};
+      \node (varb)    [lstvar,node distance=10pt, on chain=going below] {\LstVar{b} = \False};
+      \node (varddys) [lstvar,node distance=10pt, on chain=going below] {\LstVar{ddys}};
+    }
+    \node (p1) [prepad,on chain=going below] {};
+    {
+      [start branch=a1]
+      \node (pad1) [pad, on chain=going right,minimum size=22mm] {};
+      \node (b11) [xpadTrie,on chain=going right] {};
+      \node (b12) [xpadTrie,on chain=going right] {};
+      \node (b13) [xpadTrie,on chain=going right] {};
+      \node (b14) [xpadTrie,on chain=going right] {};
+      \node (b15) [xpadLeaf,on chain=going right] {};
+      \node (pad) [apad, on chain=going right,minimum size=0mm] {};
+      \node (o1) [xpad,on chain=going right] {};
+    }
+    \node (p2) [postpad,on chain=going below] {};
+    \node (a2) [consV,on chain=going below] {$n_2$\nodepart{second}{\Num{4}}};
+    {
+      [start branch=a2t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a2t) [thunk,on chain=going right] {
+        $\texttt{dedup}~a_2$
+        $\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{0}}}$
+      };
+    }
+    \node (p) [prepad,on chain=going below] {};
+    {
+      [start branch=a2]
+      \node (pad) [pad, on chain=going right,,minimum size=22mm] {};
+      \node (b21) [trie,on chain=going right] {};
+      \node (b22) [trie,on chain=going right] {};
+      \node (b23) [trie,on chain=going right] {};
+      \node (b24) [trie,on chain=going right] {};
+      \node (b25) [leaf,on chain=going right] {$n_2$\nodepart{second}{\Num{4}}};
+      \node (pad) [apad, on chain=going right] {};
+      \node (o2) [consV,on chain=going right] {$n_2$\nodepart{second}{\Num{4}}};
+    }
+    \node (a3pad) [postpad,on chain=going below] {};
+    \node (a3) [xpadConsV,on chain=going below] {};
+    {
+      [start branch=a3t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a3t) [xpadt,on chain=going right] {};
+    }    
+    \node (p) [prepad,on chain=going below] {};
+    {
+      [start branch=a3]
+      \node (pad) [pad, on chain=going right,minimum size=22mm] {};
+      \node (b31) [xpadTrie,on chain=going right] {};
+      \node (b32) [xpadTrie,on chain=going right] {};
+      \node (b33) [xpadTrie,on chain=going right] {};
+      \node (b34) [xpadTrie,on chain=going right] {};
+      \node (b35) [xpadLeaf,on chain=going right] {};
+      \node (pad) [apad, on chain=going right] {};
+      \node (o3) [xpad,on chain=going right] {};
+    }
+  }
+
+  \begin{pgfonlayer}{background}
+    \draw (a1.north)+(-5pt,0pt) node {\large Input List};
+    \draw (a1t.north)+(5pt,-8pt) node {\large Computation};
+    \draw (o1.north)+(-0pt,26pt) node {\large Output List};
+    
+    %\draw (a1t.north)+(-3pt,8pt) node {$\texttt{comp}$};
+    \draw (a2t.north west)+(-3pt,5pt) node {$\NmBinOp{\NmStr{dd}}{n_1}$};
+    \draw (a3t)+(0,10pt) node (a3t-nm) {$\NmBinOp{\NmStr{dd}}{n_2}$};
+
+    \draw (a1) node {$\vdots$};
+    \draw (a3)+(0,6pt) node (a3-nm) {$a_3$};
+    \draw (a1t) node {$\vdots$};
+    \draw (b11) node {$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{0}}}$};
+    \draw (b12) node {$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{1}}}$};
+    \draw (b13) node {$\cdots$};
+    \draw (b14) node {$\cdots$};
+    \draw (b15) node {$\cdots$};
+
+    \draw (o1)+(0,10pt) node {$\vdots$};
+    \draw (o3) node {$\NmBinOp{\NmStr{r}}{n_4}$};
+
+    \path (a1.east)+(0,0) node (a1e) {};
+    \path (a3.west)+(0,0) node (a3w) {};
+    \path (a1.south east)+(0,0) node (a1s) {};
+
+    \path (a3.north)+(0,0) node (a3n) {};
+    \path (a3t.west)+(0,0) node (a3tw) {};
+    \path (o3.north)+(0,0) node (o3n) {};
+    \path (o3.west)+(-10pt,0) node (o3w) {};
+    \path (b12.south)+(0,0) node (b12s) {};
+    \path (b11.south west)+(0,0) node (b11sw) {};
+    \path (b11.west)+(-5pt,0) node (b11w) {};
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \RefTrie{b21}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{0}}}$}
+    \RefTrie{b22}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{1}}}$}
+    \RefTrie{b23}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{2}}}$}
+    \RefTrie{b24}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{3}}}$}
+    \RefLeaf{b25}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{4}}}$}
+    
+    %%%%%%%%%%%%%%%%%%%
+    %\RefConsC{a1}{$a_1$}
+    \RefCons{a2}{$a_2$}
+    %\RefCons{a3}{$a_3$}
+    %\RefCons{a4}{$a_4$}
+    %\RefNil{a5}{$a_5$}
+
+    %%%%%%%%%
+    %\RefCons{o1}{$n_1$}
+    \RefConsOut{o2}{$\NmBinOp{\NmStr{r}}{n_2}$}
+    %\RefCons{o3}{$n_3$}
+    %\RefCons{o4}{$n_4$}
+    %\RefNil{o6}{$n_5$}
+
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{foreground}
+    %%% Input ptrs
+    %\ConsTailPtr{a1}{a2n}
+    \MysRefPtr{p1}{a2n}
+    \MysRefPtr{o1}{o2n}
+    
+    \ConsTailPtr{a2}{a3n}    
+    
+    %%% Output ptrs
+    %\ConsTailPtr{o1}{o2n}
+    \ConsTailPtr{o2}{o3n}    
+   
+    %%% Trie ptrs for thunk a2t
+    \LeftRefPtr{b21}{b22w}
+    \RightRefPtrBend{b21}{b12s}{bend right=10mm}
+    \LeftRefPtr{b22}{b23}
+    \RightNilPtr{b22}    
+    \LeftNilPtr{b23}
+    \RightRefPtr{b23}{b24w}
+    \LeftRefPtr{b24}{b25w}
+    \RightNilPtr{b24}
+
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{dcgbackground}
+    \path[dcgthunkforce] (a1t) edge[->] (a2t);
+    \path[dcgrefget] (a2t) edge[->] (a2e) node [above=2pt] {};a
+    \path[dcgrefget, bend right] (a2t) edge[->] (b11sw) node [above=3pt] {};    
+    \path[dcgthunkforce] (a2t) edge[->] (a3t);
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{staticdynamic}
+    \path[lstvarptr, bend left=5pt] (varl) edge[->] (a2nw);
+    \path[lstvarptr, bend left=5pt] (vart) edge[->] (b11w);
+    \path[lstvarptr, bend right=12pt] (vartx) edge[->] (b21w);
+    \path[lstvarptr, bend right] (varddys) edge[->] (a3t-nm);
+    \path[lstvarptr, bend left=6mm] (varys) edge[->] (a3-nm);
+
+    \path[lstvarptr, fill=none, line width=2pt] (a3t-nm) |- node [pos=0.621, above=3pt]{\emph{when forced, returns}} (o3w);
+
+    \path (b11.north |- b11.west)+(0,10pt) node (braceleft) {};
+    \path (b15.north |- b15.east)+(0,10pt) node (braceright) {};
+    \draw [decorate,decoration={brace,amplitude=10pt},line width=1.2pt] (braceleft) -- (braceright) node [pos=0.5,above=10pt] {Accumulator: Hash Trie};
+;
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{dcgeffects}
+  \end{pgfonlayer}
+    
+\end{tikzpicture}

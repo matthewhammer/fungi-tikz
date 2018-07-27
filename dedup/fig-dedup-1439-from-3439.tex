@@ -1,0 +1,276 @@
+\begin{tikzpicture}
+  { [start chain]
+    [start branch=a1]
+    \node (a1) [consV,on chain=going below] {$n_1$\nodepart{second}{\Num{1}}};
+    {
+      [start branch=a1t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a1t) [thunk,on chain=going right] {$\texttt{dedup}~a_1$ \texttt{emp}};
+    }
+    \node (p1) [prepad,on chain=going below] {};
+    {
+      [start branch=a1]
+      \node (pad1) [pad, on chain=going right,minimum size=22mm] {};      
+      \node (b11) [trie,on chain=going right] {};
+      \node (b12) [trie,on chain=going right] {};
+      \node (b13) [trie,on chain=going right] {};
+      \node (b14) [trie,on chain=going right] {};
+      \node (b15) [leaf,on chain=going right] {$n_1$\nodepart{second}{\Num{1}}};
+      \node (pad) [apad, on chain=going right,minimum size=0mm] {};
+      \node (o1) [consV,on chain=going right] {$n_1$\nodepart{second}{\Num{1}}};
+    }
+    \node (p2) [postpad,on chain=going below] {};
+    \node (a2) [consV,on chain=going below] {$n_2$\nodepart{second}{\Num{4}}};
+    {
+      [start branch=a2t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a2t) [thunk,on chain=going right] {
+        $\texttt{dedup}~a_2$
+        $\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{0}}}$
+      };
+    }
+    \node (p) [prepad,on chain=going below] {};
+    {
+      [start branch=a2]
+      \node (pad) [pad, on chain=going right,,minimum size=22mm] {};
+      \node (b21) [trie,on chain=going right] {};
+      \node (b22) [trie,on chain=going right] {};
+      \node (b23) [trie,on chain=going right] {};
+      \node (b24) [trie,on chain=going right] {};
+      \node (b25) [leaf,on chain=going right] {$n_2$\nodepart{second}{\Num{4}}};
+      \node (pad) [apad, on chain=going right] {};
+      \node (o2) [consV,on chain=going right] {$n_2$\nodepart{second}{\Num{4}}};
+    }
+    \node (p) [postpad,on chain=going below] {};
+    \node (a3) [consV,on chain=going below] {$n_3$\nodepart{second}{\Num{3}}};
+    {
+      [start branch=a3t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a3t) [thunk,on chain=going right] {
+        $\texttt{dedup}~a_3$
+        $\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{0}}}$
+      };
+    }    
+    \node (p) [prepad,on chain=going below] {};
+    {
+      [start branch=a3]
+      \node (pad) [pad, on chain=going right,minimum size=22mm] {};
+      \node (b31) [trie,on chain=going right] {};
+      \node (b32) [trie,on chain=going right] {};
+      \node (b33) [trie,on chain=going right] {};
+      \node (b34) [trie,on chain=going right] {};
+      \node (b35) [leaf,on chain=going right] {$n_3$\nodepart{second}{\Num{3}}};
+      \node (pad) [apad, on chain=going right] {};
+      \node (o3) [consV,on chain=going right] {$n_3$\nodepart{second}{\Num{3}}};
+    }
+    \node (p) [postpad,on chain=going below] {};
+    \node (a4) [consV,on chain=going below] {$n_4$\nodepart{second}{\Num{9}}};
+    {
+      [start branch=a3t]
+      \node (p) [smallpad, on chain=going right] {};
+      \node (a4t) [thunk,on chain=going right] {
+        $\texttt{dedup}~a_4$
+        $\NmBinOp{\NmStr{t}}{\NmBinOp{n_3}{\NmNum{0}}}$
+      };
+    }    
+    \node (p) [prepad,on chain=going below] {};
+    {
+      [start branch=a4]
+      \node (pad) [pad, on chain=going right,minimum size=22mm] {};
+      \node (b41) [trie,on chain=going right] {};
+      \node (b42) [trie,on chain=going right] {};
+      \node (b43) [trie,on chain=going right] {};
+      \node (b44) [trie,on chain=going right] {};
+      \node (b45) [leaf,on chain=going right] {$n_4$\nodepart{second}{\Num{9}}};
+      \node (pad) [apad, on chain=going right] {};
+      \node (o4) [consV,on chain=going right] {$n_4$\nodepart{second}{\Num{9}}};      
+    }
+    \node (p) [postpad,on chain=going below] {};
+   \node (a5) [nil,on chain=going below] {nil};
+   {
+     [start branch=a4t]
+     \node (p) [smallpad, on chain=going right] {};           
+     \node (a5t) [thunk,on chain=going right] {
+       $\texttt{dedup}~a_5$
+       $\NmBinOp{\NmStr{t}}{\NmBinOp{n_4}{\NmNum{0}}}$
+     };
+   }
+   \node (p) [prepad,on chain=going below] {};
+   {
+     [start branch=a5]
+     \node (pad) [pad, on chain=going right,minimum size=26mm] {};
+     \node (o6) [nil,on chain=going right] {nil};
+   }
+  }
+
+  \begin{pgfonlayer}{background}
+    \draw (a1.north)+(0pt,20pt) node [] {\large Input List};
+    \draw (a1t.north)+(-3pt,12pt) node {$\textsf{comp}$};
+    \draw (a2t.north west)+(-3pt,15pt) node {$\NmBinOp{\NmStr{dd}}{n_1}$};
+    \draw (a3t.north west)+(-3pt,15pt) node {$\NmBinOp{\NmStr{dd}}{n_2}$};
+    \draw (a4t.north west)+(-3pt,5pt) node {$\NmBinOp{\NmStr{dd}}{n_3}$};
+    \draw (a5t.north west)+(-3pt,5pt) node {$\NmBinOp{\NmStr{dd}}{n_4}$};
+    
+    \draw (b13.north)+(-0pt,35pt) node {\large Accumulator: Hash Trie};
+    \draw (o1.north)+(-0pt,26pt) node[text width=15mm, align=center] {\large Output List};
+
+    \path (a1.east)+(0,0) node (a1e) {};
+    \path (a1.south east)+(0,0) node (a1s) {};
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+    \RefTrie{b11}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{0}}}$}
+    \RefTrie{b12}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{1}}}$}
+    \RefTrie{b13}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{2}}}$}
+    \RefTrie{b14}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{3}}}$}
+    \RefLeafC{b15}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_1}{\NmNum{4}}}$}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \RefTrie{b21}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{0}}}$}
+    \RefTrie{b22}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{1}}}$}
+    \RefTrie{b23}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{2}}}$}
+    \RefTrie{b24}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{3}}}$}
+    \RefLeaf{b25}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_2}{\NmNum{4}}}$}
+
+    %%%%%%%%%%%
+    \RefTrie{b31}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_3}{\NmNum{0}}}$}
+    \RefTrie{b32}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_3}{\NmNum{1}}}$}
+    \RefTrie{b33}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_3}{\NmNum{2}}}$}
+    \RefTrie{b34}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_3}{\NmNum{3}}}$}
+    \RefLeaf{b35}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_3}{\NmNum{4}}}$}
+           
+    %%%%%%%%%%%%%   
+    \RefTrie{b41}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_4}{\NmNum{0}}}$}
+    \RefTrie{b42}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_4}{\NmNum{1}}}$}
+    \RefTrie{b43}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_4}{\NmNum{2}}}$}
+    \RefTrie{b44}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_4}{\NmNum{3}}}$}
+    \RefLeaf{b45}{$\NmBinOp{\NmStr{t}}{\NmBinOp{n_4}{\NmNum{4}}}$}
+
+    %%%%%%%%%%%%%%%%%%%
+    \RefConsC{a1}{$a_1$}
+    \RefCons{a2}{$a_2$}
+    \RefCons{a3}{$a_3$}
+    \RefCons{a4}{$a_4$}
+    \RefNil{a5}{$a_5$}
+
+    %%%%%%%%%
+    \RefConsC{o1}{$\NmBinOp{\NmStr{r}}{n_1}$}
+    \RefConsC{o2}{$\NmBinOp{\NmStr{r}}{n_2}$}
+    \RefConsOut{o3}{$\NmBinOp{\NmStr{r}}{n_3}$}
+    \RefConsOut{o4}{$\NmBinOp{\NmStr{r}}{n_4}$}
+    \RefNil{o6}{$\NmBinOp{\NmStr{r}}{n_5}$}
+
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{foreground}
+    %%% Input ptrs
+    \ConsTailPtr{a1}{a2n}
+    \ConsTailPtr{a2}{a3n}
+    \ConsTailPtr{a3}{a4n}
+    \ConsTailPtr{a4}{a5n}
+
+    %%% Output ptrs
+    \ConsTailPtr{o1}{o2n}
+    \ConsTailPtr{o2}{o3n}    
+    \ConsTailPtr{o3}{o4n}
+    \ConsTailPtrBend{o4}{o6e}{bend left=10mm}
+
+    %%% Trie ptrs for thunk a1t
+    \LeftRefPtr{b11}{b12w}
+    \RightNilPtr{b11}    
+    \LeftNilPtr{b12}
+    \RightRefPtr{b12}{b13w}    
+    \LeftNilPtr{b13}
+    \RightRefPtr{b13}{b14w}    
+    \LeftRefPtr{b14}{b15w}
+    \RightNilPtr{b14}
+   
+    %%% Trie ptrs for thunk a2t
+    \RightNilPtr{b21}
+    \LeftRefPtr{b21}{b22w}
+    \LeftRefPtr{b22}{b23}
+    \RightRefPtrBend{b22}{b13s}{bend right=10mm}
+    \LeftNilPtr{b23}
+    \RightRefPtr{b23}{b24w}
+    \LeftRefPtr{b24}{b25w}
+    \RightNilPtr{b24}
+
+    % Trie ptrs for thunk a3t
+    \LeftRefPtrBend{b31}{b22s}{bend right=18mm}
+    \RightRefPtr{b31}{b32w}
+    \RightNilPtr{b32}
+    \LeftRefPtr{b32}{b33w}
+    \LeftRefPtr{b33}{b34w}
+    \RightNilPtr{b33}
+    \LeftNilPtr{b34}
+    \RightRefPtr{b34}{b35w}
+
+    % Trie ptrs for thunk a4t
+    \LeftRefPtrBend{b41}{b22s}{bend right=38mm}
+    \RightRefPtr{b41}{b42w}    
+    \LeftRefPtr{b42}{b43w}
+    \RightNilPtr{b42}
+    \LeftRefPtrBend{b43}{b34s}{bend right=20mm}
+    \RightRefPtr{b43}{b44w}        
+    \LeftRefPtr{b44}{b45w}
+    \RightNilPtr{b44}
+
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{dcgbackground}
+    %a1
+    \path[REDOdcgrefget] (a1t) edge[->]   (a1e) node [above=3pt] {};
+    \path[REDOdcgthunkforce] (a1t) edge[->] (a2t);
+
+    %a2
+    \path[REDOdcgrefget] (a2t) edge[->] (a2e) node [above=2pt] {};a
+    \path[REDOdcgrefget, bend right] (a2t) edge[->] (b11sw) node [above=3pt] {};    
+    \path[REDOdcgrefget, bend right] (a2t) edge[->] (b12sw) node [above=3pt] {};
+    \path[REDOdcgthunkforce] (a2t) edge[->] (a3t);
+
+    %a3
+    \path[REDOdcgrefget] (a3t) edge[->] (a3e) node [above=2pt] {};
+    \path[REDOdcgrefget, bend right] (a3t) edge[->] (b21sw)+(0,-0.1) node [above=3pt] {};
+    \path[REDOdcgthunkforce] (a3t) edge[->] (a4t);
+
+    %a4    
+    \path[dcgrefget] (a4t) edge[->] (a4e) node [above=2pt] {};    
+    \path[dcgrefget, bend right] (a4t) edge[->] (b31sw)+(0,-0.1) node [above=3pt] {};
+    \path[dcgrefget, bend right] (a4t) edge[->] (b32sw)+(0,-0.1) node [above=3pt] {};
+    \path[dcgrefget, bend right=18mm] (a4t) edge[->] (b33sw)+(0,-0.1) node [above=3pt] {};    
+    \path[dcgthunkforce] (a4t)+(0,-9pt) edge[->] (a5t);
+
+    %a5
+    \path[dcgrefget] (a5t) edge[->] (a5e) node [above=2pt] {};
+
+  \end{pgfonlayer}
+
+  \begin{pgfonlayer}{dcgeffects}
+    \RefConsChange{a1}
+    %%%
+    \ThunkReEval{a1t}
+    %%%
+    \RefTrieChange{b11}    
+    \RefTrieChange{b12}
+    \RefTrieChange{b13}
+    \RefTrieChange{b14}
+    \RefLeafChange{b15}
+    \RefConsChange{o1}
+    %%%
+    \ThunkReEval{a2t}
+    %%%
+    \RefTrieChange{b21}    
+    \RefTrieChange{b22}
+    \RefConsChange{o2}
+    %%
+    \ThunkReEval{a3t}
+    %%
+    %% memo match
+  \end{pgfonlayer}
+
+  %% \begin{pgfonlayer}{tiles}
+  %%   \draw[fill=blue!35]
+  %%   TODO
+  %%   to cycle;
+  %% \end{pgfonlayer}
+    
+\end{tikzpicture}
